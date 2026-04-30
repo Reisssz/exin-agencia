@@ -1327,6 +1327,20 @@ footer {
   }
 }
 
+/* ── REMOVER CURSOR CUSTOM NO MOBILE ── */
+@media (max-width: 768px) {
+  body {
+    cursor: auto !important;
+  }
+
+  #cursor-dot,
+  #cursor-ring,
+  .cursor-trail,
+  #cursor-tag {
+    display: none !important;
+  }
+}
+
 @media (max-width: 768px) {
   /* Navigation */
   .nav-links {
