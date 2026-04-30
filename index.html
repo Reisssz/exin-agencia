@@ -2348,35 +2348,51 @@ function initManifesto() {
 // ═══════════════════════════════════════════════════════
 // SERVICES DRAG
 // ═══════════════════════════════════════════════════════
+// ═══════════════════════════════════════════════════════
+// SERVICES DRAG (CORRIGIDO)
+// ═══════════════════════════════════════════════════════
 (function initServicesDrag() {
   const wrap = document.getElementById('services-wrap');
   const track = document.getElementById('services-track');
+  
+  // Verifica se elementos existem
+  if (!wrap || !track) return;
+  
   let isDragging = false;
   let startX = 0;
   let scrollLeft = 0;
   let vel = 0;
   let lastX = 0;
   let raf;
+  let moved = false;
 
+  // Mouse events
   wrap.addEventListener('mousedown', (e) => {
     isDragging = true;
+    moved = false;
     startX = e.pageX - wrap.offsetLeft;
     scrollLeft = wrap.scrollLeft;
     lastX = e.pageX;
+    wrap.style.cursor = 'grabbing';
     cancelAnimationFrame(raf);
   });
   
   document.addEventListener('mouseup', () => {
     if (!isDragging) return;
     isDragging = false;
+    wrap.style.cursor = 'grab';
     
+    // Momentum
     function momentum() {
-      if (Math.abs(vel) < 0.5) return;
-      vel *= 0.92;
+      if (Math.abs(vel) < 0.3) {
+        cancelAnimationFrame(raf);
+        return;
+      }
+      vel *= 0.94;
       wrap.scrollLeft -= vel;
       raf = requestAnimationFrame(momentum);
     }
-    momentum();
+    raf = requestAnimationFrame(momentum);
   });
   
   document.addEventListener('mousemove', (e) => {
@@ -2385,9 +2401,58 @@ function initManifesto() {
     vel = e.pageX - lastX;
     lastX = e.pageX;
     const x = e.pageX - wrap.offsetLeft;
-    const walk = (x - startX) * 1.2;
+    const walk = (x - startX) * 1.5;
     wrap.scrollLeft = scrollLeft - walk;
+    
+    if (Math.abs(walk) > 3) moved = true;
   });
+
+  // Previne clique acidental após drag
+  wrap.addEventListener('click', (e) => {
+    if (moved) {
+      e.preventDefault();
+      e.stopPropagation();
+      moved = false;
+    }
+  });
+
+  // Touch events para mobile
+  wrap.addEventListener('touchstart', (e) => {
+    isDragging = true;
+    moved = false;
+    startX = e.touches[0].pageX - wrap.offsetLeft;
+    scrollLeft = wrap.scrollLeft;
+    lastX = e.touches[0].pageX;
+    cancelAnimationFrame(raf);
+  }, { passive: false });
+  
+  document.addEventListener('touchend', () => {
+    if (!isDragging) return;
+    isDragging = false;
+    
+    function momentum() {
+      if (Math.abs(vel) < 0.3) {
+        cancelAnimationFrame(raf);
+        return;
+      }
+      vel *= 0.94;
+      wrap.scrollLeft -= vel;
+      raf = requestAnimationFrame(momentum);
+    }
+    raf = requestAnimationFrame(momentum);
+  });
+  
+  document.addEventListener('touchmove', (e) => {
+    if (!isDragging) return;
+    e.preventDefault();
+    vel = e.touches[0].pageX - lastX;
+    lastX = e.touches[0].pageX;
+    const x = e.touches[0].pageX - wrap.offsetLeft;
+    const walk = (x - startX) * 1.5;
+    wrap.scrollLeft = scrollLeft - walk;
+    
+    if (Math.abs(walk) > 3) moved = true;
+  }, { passive: false });
 })();
 
 // ═══════════════════════════════════════════════════════
