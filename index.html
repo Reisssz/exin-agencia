@@ -38,6 +38,348 @@
   --transition-spring: 0.55s cubic-bezier(.23,1,.32,1);
 }
 
+/* ── FOOTER EXTRA STYLES ── */
+.footer-dev-link {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.15em;
+  color: var(--white-20);
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: color 0.2s;
+  position: relative;
+}
+
+.footer-dev-link:hover {
+  color: var(--star);
+}
+
+.footer-dev-link strong {
+  font-weight: 700;
+  color: var(--primary);
+  transition: color 0.2s;
+}
+
+.footer-dev-link:hover strong {
+  color: var(--star);
+}
+
+.footer-wpp-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.15em;
+  color: var(--white-20);
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: all 0.2s;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+}
+
+.footer-wpp-link:hover {
+  color: #25D366;
+  background: rgba(37, 211, 102, 0.1);
+}
+
+.footer-wpp-link svg {
+  transition: transform 0.2s;
+}
+
+.footer-wpp-link:hover svg {
+  transform: scale(1.1);
+}
+
+@media (max-width: 768px) {
+  .footer-links {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .footer-wpp-link span {
+    display: inline;
+  }
+}
+
+@media (max-width: 480px) {
+  .footer-links {
+    gap: 1rem;
+  }
+  
+  .footer-wpp-link span {
+    display: none;
+  }
+  
+  .footer-wpp-link svg {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════
+   TEAM SECTION — NOSSA CONSTELAÇÃO
+   ═══════════════════════════════════════════════════════ */
+#team {
+  padding: clamp(4rem, 10vw, 8rem) clamp(1.5rem, 6vw, 6rem);
+  position: relative;
+  overflow: hidden;
+  background: radial-gradient(ellipse 80% 60% at 50% 30%, rgba(86,50,217,0.08), transparent);
+}
+
+.team-bg-glow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 30% 20%, rgba(125,92,242,0.12), transparent 60%);
+  pointer-events: none;
+}
+
+.team-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+}
+
+.team-header {
+  text-align: center;
+  margin-bottom: clamp(3rem, 6vw, 5rem);
+}
+
+.team-tag {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--primary);
+  margin-bottom: 1.5rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.team-tag::before,
+.team-tag::after {
+  content: '';
+  display: block;
+  width: 40px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--primary), transparent);
+}
+
+.team-tag::after {
+  transform: rotate(180deg);
+}
+
+.team-title {
+  font-family: var(--display);
+  font-size: clamp(2rem, 5vw, 4rem);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+}
+
+.team-title em {
+  font-style: normal;
+  color: var(--star);
+  position: relative;
+  display: inline-block;
+}
+
+.team-title em::after {
+  content: '';
+  position: absolute;
+  bottom: 0.1em;
+  left: 0;
+  width: 100%;
+  height: 0.15em;
+  background: linear-gradient(90deg, var(--primary), var(--star));
+  opacity: 0.5;
+  border-radius: 2px;
+}
+
+.team-subtitle {
+  font-family: var(--body);
+  font-size: clamp(0.85rem, 1.2vw, 1rem);
+  line-height: 1.7;
+  color: var(--white-50);
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.team-card {
+  background: rgba(41,35,64,0.4);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(125,92,242,0.12);
+  border-radius: 12px;
+  transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.team-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(86,50,217,0.15), transparent 70%);
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+
+.team-card:hover {
+  border-color: rgba(125,92,242,0.4);
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.3), 0 0 30px rgba(125,92,242,0.15);
+}
+
+.team-card:hover::before {
+  opacity: 1;
+}
+
+.team-card-inner {
+  padding: clamp(1.8rem, 3vw, 2.5rem);
+  position: relative;
+  z-index: 1;
+}
+
+.team-avatar {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  margin: 0 auto 1.5rem;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--primary), var(--nebula));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.team-avatar-glow {
+  position: absolute;
+  inset: -3px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--star), var(--primary));
+  opacity: 0;
+  transition: opacity 0.3s;
+  filter: blur(8px);
+}
+
+.team-card:hover .team-avatar-glow {
+  opacity: 0.6;
+}
+
+.team-avatar-placeholder {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  background: rgba(18,18,20,0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--star);
+}
+
+.team-name {
+  font-family: var(--display);
+  font-size: 1.35rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 0.35rem;
+  color: var(--white);
+}
+
+.team-role {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-align: center;
+  color: var(--primary);
+  margin-bottom: 1rem;
+}
+
+.team-bio {
+  font-family: var(--body);
+  font-size: 0.85rem;
+  line-height: 1.6;
+  text-align: center;
+  color: var(--white-50);
+  margin-bottom: 1.5rem;
+}
+
+.team-social {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.team-social-link {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(125,92,242,0.12);
+  border: 1px solid rgba(125,92,242,0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  font-weight: 500;
+  text-decoration: none;
+  color: var(--white-60);
+  transition: all 0.3s;
+}
+
+.team-social-link:hover {
+  background: var(--star);
+  border-color: transparent;
+  color: var(--black);
+  transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+  .team-grid {
+    grid-template-columns: 1fr;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .team-tag::before,
+  .team-tag::after {
+    width: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .team-card-inner {
+    padding: 1.5rem;
+  }
+  
+  .team-avatar {
+    width: 80px;
+    height: 80px;
+  }
+  
+  .team-avatar-placeholder {
+    width: 72px;
+    height: 72px;
+  }
+}
+
 /* ── RESET ── */
 *, *::before, *::after {
   margin: 0;
@@ -1699,6 +2041,162 @@ footer {
   <canvas id="portfolio-canvas" aria-label="Nuvem de partículas interativa representando o portfólio"></canvas>
 </section>
 
+
+<!-- ═══════════════════════════════════════════════════════
+     TEAM SECTION — NOSSA CONSTELAÇÃO
+     ═══════════════════════════════════════════════════════ -->
+<section id="team" aria-label="Nossa Equipe">
+  <div class="team-bg-glow" aria-hidden="true"></div>
+  
+  <div class="team-container">
+    <div class="team-header">
+      <div class="team-tag">Constelação</div>
+      <h2 class="team-title">As mentes por trás<br>das <em>singularidades</em></h2>
+      <p class="team-subtitle">
+        Cada projeto é um organismo vivo. Nossa constelação une estrategistas,<br>
+        criadores e realizadores em orbita criativa permanente.
+      </p>
+    </div>
+    
+    <div class="team-grid">
+      <!-- Membro 1 -->
+      <article class="team-card" data-team="Estrategista">
+        <div class="team-card-inner">
+          <div class="team-avatar">
+            <div class="team-avatar-glow"></div>
+            <div class="team-avatar-placeholder">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                <circle cx="12" cy="7" r="4"></circle>
+              </svg>
+            </div>
+          </div>
+          <h3 class="team-name">Rafael Mendes</h3>
+          <p class="team-role">Diretor de Estratégia & Criação</p>
+          <p class="team-bio">Arquiteto de narrativas com 12+ anos transformando marcas em fenômenos de atenção.</p>
+          <div class="team-social">
+            <a href="#" aria-label="LinkedIn" class="team-social-link">in</a>
+            <a href="#" aria-label="Instagram" class="team-social-link">ig</a>
+          </div>
+        </div>
+      </article>
+      
+      <!-- Membro 2 -->
+      <article class="team-card" data-team="Filmaker">
+        <div class="team-card-inner">
+          <div class="team-avatar">
+            <div class="team-avatar-glow"></div>
+            <div class="team-avatar-placeholder">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+                <circle cx="12" cy="12" r="3"></circle>
+              </svg>
+            </div>
+          </div>
+          <h3 class="team-name">Camila Torres</h3>
+          <p class="team-role">Diretora Audiovisual & Motion</p>
+          <p class="team-bio">Especialista em linguagem cinematográfica e universos visuais imersivos.</p>
+          <div class="team-social">
+            <a href="#" aria-label="LinkedIn" class="team-social-link">in</a>
+            <a href="#" aria-label="Instagram" class="team-social-link">ig</a>
+          </div>
+        </div>
+      </article>
+      
+      <!-- Membro 3 -->
+      <article class="team-card" data-team="Designer">
+        <div class="team-card-inner">
+          <div class="team-avatar">
+            <div class="team-avatar-glow"></div>
+            <div class="team-avatar-placeholder">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M12 2a10 10 0 1 0 10 10"></path>
+                <path d="M12 6v6l4 2"></path>
+              </svg>
+            </div>
+          </div>
+          <h3 class="team-name">Lucas Ferreira</h3>
+          <p class="team-role">Design Director & Branding</p>
+          <p class="team-bio">Cria sistemas visuais vivos que transcendem o convencional.</p>
+          <div class="team-social">
+            <a href="#" aria-label="LinkedIn" class="team-social-link">in</a>
+            <a href="#" aria-label="Instagram" class="team-social-link">ig</a>
+          </div>
+        </div>
+      </article>
+      
+      <!-- Membro 4 -->
+      <article class="team-card" data-team="Social Media">
+        <div class="team-card-inner">
+          <div class="team-avatar">
+            <div class="team-avatar-glow"></div>
+            <div class="team-avatar-placeholder">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
+              </svg>
+            </div>
+          </div>
+          <h3 class="team-name">Juliana Costa</h3>
+          <p class="team-role">Head de Conteúdo & Estratégia Social</p>
+          <p class="team-bio">Arquiteta de presença digital e comunidades gravitacionais.</p>
+          <div class="team-social">
+            <a href="#" aria-label="LinkedIn" class="team-social-link">in</a>
+            <a href="#" aria-label="Instagram" class="team-social-link">ig</a>
+          </div>
+        </div>
+      </article>
+      
+      <!-- Membro 5 -->
+      <article class="team-card" data-team="Developer">
+        <div class="team-card-inner">
+          <div class="team-avatar">
+            <div class="team-avatar-glow"></div>
+            <div class="team-avatar-placeholder">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                <polyline points="2 17 12 22 22 17"></polyline>
+                <polyline points="2 12 12 17 22 12"></polyline>
+              </svg>
+            </div>
+          </div>
+          <h3 class="team-name">André Lima</h3>
+          <p class="team-role">Tech Lead & Experiência Digital</p>
+          <p class="team-bio">Transforma conceitos abstratos em experiências interativas de alta performance.</p>
+          <div class="team-social">
+            <a href="#" aria-label="LinkedIn" class="team-social-link">in</a>
+            <a href="#" aria-label="Instagram" class="team-social-link">ig</a>
+          </div>
+        </div>
+      </article>
+      
+      <!-- Membro 6 -->
+      <article class="team-card" data-team="Producer">
+        <div class="team-card-inner">
+          <div class="team-avatar">
+            <div class="team-avatar-glow"></div>
+            <div class="team-avatar-placeholder">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                <polyline points="14 2 14 8 20 8"></polyline>
+                <line x1="16" y1="13" x2="8" y2="13"></line>
+                <line x1="16" y1="17" x2="8" y2="17"></line>
+                <polyline points="10 9 9 9 8 9"></polyline>
+              </svg>
+            </div>
+          </div>
+          <h3 class="team-name">Marina Albuquerque</h3>
+          <p class="team-role">Produtora Executiva & Operações</p>
+          <p class="team-bio">Garante que cada singularidade nasça no tempo e espaço certos.</p>
+          <div class="team-social">
+            <a href="#" aria-label="LinkedIn" class="team-social-link">in</a>
+            <a href="#" aria-label="Instagram" class="team-social-link">ig</a>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
 <!-- ═══════════════════════════════════════════════════════
      VIDEOS SECTION
      ═══════════════════════════════════════════════════════ -->
@@ -1864,11 +2362,15 @@ footer {
   </p>
   <div class="footer-bottom">
     <span class="footer-copy">© 2025 EXIN Studio — Todos os direitos reservados</span>
-    <nav class="footer-links" aria-label="Links do rodapé">
+    <div class="footer-links">
       <a href="#">Privacidade</a>
       <a href="#">Termos</a>
-      <a href="#" aria-label="Instagram EXIN">Instagram</a>
-    </nav>
+      <a href="#" class="footer-social-link" aria-label="Instagram EXIN">Instagram</a>
+      <!-- Desenvolvido por Weblytics -->
+      <a href="https://weblytics.com.br" target="_blank" rel="noopener noreferrer" class="footer-dev-link">
+        desenvolvido por <strong>Weblytics</strong>
+      </a>
+    </div>
   </div>
 </footer>
 
