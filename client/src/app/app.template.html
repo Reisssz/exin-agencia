@@ -1,0 +1,339 @@
+<header class="site-header">
+  <a class="brand" href="#top" aria-label="EXIN Comunicação, início" (click)="closeMenu()"
+    ><img src="/logo-exin.png" width="34" height="34" alt="EXIN Comunicação"
+  /></a>
+  <button
+    class="menu-toggle"
+    type="button"
+    [attr.aria-expanded]="menuOpen()"
+    aria-controls="site-nav"
+    aria-label="Abrir menu"
+    (click)="toggleMenu()"
+  >
+    <span></span><span></span>
+  </button>
+  <nav id="site-nav" class="site-nav" [class.is-open]="menuOpen()" aria-label="Navegação principal">
+    <a href="#manifesto" (click)="closeMenu()">Manifesto</a
+    ><a href="#services" (click)="closeMenu()">Serviços</a
+    ><a href="#portfolio" (click)="closeMenu()">Portfólio</a
+    ><a href="#contact" (click)="closeMenu()">Contato</a>
+  </nav>
+  <a class="header-cta" href="https://wa.me/5591980785068" target="_blank" rel="noopener noreferrer"
+    >Iniciar projeto <span aria-hidden="true">↗</span></a
+  >
+</header>
+
+<main>
+  <section class="hero" id="top" aria-labelledby="hero-title">
+    <div class="hero-grid" aria-hidden="true"></div>
+    <div class="hero-content">
+      <p class="eyebrow"><span class="status-dot"></span> Estratégia de marketing · Belém, PA</p>
+      <h1 id="hero-title">
+        <span>Estratégia de</span><span>marketing para</span><span><em>o próximo nível.</em></span>
+      </h1>
+      <div class="hero-bottom">
+        <div>
+          <p>
+            Marketing orientado a vendas, com estratégia, criatividade e presença em cada etapa.
+          </p>
+          <div
+            class="hero-typewriter"
+            aria-label="Branding que constrói. Conteúdo que conecta. Tráfego que converte."
+          >
+            <span>Branding que constrói.</span><span>Conteúdo que conecta.</span
+            ><span>Tráfego que converte.</span>
+          </div>
+        </div>
+        <div class="hero-actions">
+          <a
+            class="button button-primary"
+            href="https://wa.me/5591980785068"
+            target="_blank"
+            rel="noopener noreferrer"
+            >Falar com a EXIN</a
+          >
+          <a class="text-link" href="#portfolio">Ver portfólio <span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+    </div>
+    <div class="hero-ticker" aria-hidden="true">
+      <div class="ticker-track">
+        <span>Escuta</span><i></i><span>Estratégia</span><i></i><span>Construção</span><i></i
+        ><span>Comunicação que converte</span><i></i><span>Escuta</span><i></i
+        ><span>Estratégia</span><i></i><span>Construção</span><i></i
+        ><span>Comunicação que converte</span><i></i>
+      </div>
+    </div>
+    <a class="hero-scroll-hint" href="#manifesto"
+      >Role para explorar <span aria-hidden="true">↓</span></a
+    >
+  </section>
+
+  <section class="client-strip" aria-label="Marcas atendidas">
+    <p>Marcas que confiam no nosso trabalho</p>
+    <div class="client-names">
+      <span>Agrocangaia</span><span>DT Arquitetos</span><span>IMPAXX</span
+      ><span>Track &amp; Field</span><span>PIATRA</span>
+    </div>
+  </section>
+
+  <section class="manifesto section-shell" id="manifesto" aria-labelledby="manifesto-title">
+    <div class="section-kicker"><span>02</span> Manifesto</div>
+    <div class="manifesto-content" appReveal>
+      <h2 id="manifesto-title">
+        <span>Não acreditamos</span><span class="indent">em marketing</span
+        ><span class="indent-large">feito no automático.</span
+        ><span class="manifesto-small">Acreditamos em presença,</span
+        ><span class="indent">agilidade e conexão</span><span>real.</span>
+      </h2>
+      <div class="manifesto-copy">
+        <p>
+          Nossa forma de trabalhar une estratégia, sensibilidade e execução eficaz. Cada imagem,
+          vídeo e conteúdo é produzido com intenção, estética refinada e propósito claro.
+        </p>
+        <p>
+          Valorizamos o atendimento próximo e eficiente. Acompanhamos cada etapa com velocidade,
+          comprometimento e confiança.
+        </p>
+        <p>
+          Mais do que entregar conteúdo, entregamos direção, suporte e presença. Transformamos
+          ideias em comunicação que gera impacto.
+        </p>
+        <p>
+          Nossa essência está em fazer bem feito, com agilidade, qualidade e cuidado em cada
+          detalhe.
+        </p>
+      </div>
+      <blockquote class="manifesto-quote">
+        Estratégia de marketing para alavancar o seu negócio para o próximo nível.
+      </blockquote>
+    </div>
+  </section>
+
+  <section class="services section-shell" id="services" aria-labelledby="services-title">
+    <div class="section-heading">
+      <div>
+        <div class="section-kicker"><span>03</span> Serviços</div>
+        <h2 id="services-title">O que a EXIN<br /><em>entrega</em></h2>
+      </div>
+      <p>Três disciplinas. Uma arquitetura criativa integrada.</p>
+    </div>
+    <div class="service-list" appReveal>
+      @for (service of services; track service.number) {
+        <article class="service-item">
+          <span class="service-number">{{ service.number }}</span>
+          <div class="service-main">
+            <h3>{{ service.name }}</h3>
+            <p>{{ service.summary }}</p>
+            <ul class="tag-list" aria-label="Especialidades">
+              @for (tag of service.tags; track tag) {
+                <li>{{ tag }}</li>
+              }
+            </ul>
+          </div>
+          <div class="service-audience">
+            <span>Pra quem é</span>
+            <p>{{ service.audience }}</p>
+          </div>
+        </article>
+      }
+    </div>
+  </section>
+
+  <section class="portfolio section-shell" id="portfolio" aria-labelledby="portfolio-title">
+    <div class="section-heading portfolio-heading">
+      <div>
+        <div class="section-kicker"><span>04</span> Portfólio</div>
+        <h2 id="portfolio-title">Nosso<br /><em>Trabalho</em></h2>
+      </div>
+      <a
+        class="text-link"
+        href="https://www.instagram.com/exincomunicacao/"
+        target="_blank"
+        rel="noopener noreferrer"
+        >Mais no Instagram <span aria-hidden="true">↗</span></a
+      >
+    </div>
+    <div class="portfolio-grid">
+      @for (item of portfolio(); track item.id; let index = $index) {
+        <article
+          class="portfolio-item"
+          appReveal
+          [class.is-wide]="item.orientation === 'wide'"
+          [class.is-portrait]="item.orientation === 'portrait'"
+          [attr.data-index]="index + 1"
+        >
+          <button
+            class="portfolio-media"
+            type="button"
+            [attr.aria-label]="'Assistir projeto de ' + item.client"
+            (click)="openVideo(item)"
+          >
+            @if (item.source.type === 'file') {
+              <img
+                class="video-preview"
+                [src]="item.poster"
+                alt=""
+                width="640"
+                height="360"
+                loading="lazy"
+                decoding="async"
+              />
+            } @else {
+              <div class="instagram-preview">
+                <span>EXIN / REELS</span><strong>Assista no Instagram</strong>
+              </div>
+            }
+            <span class="media-overlay"></span><span class="media-play" aria-hidden="true">▶</span
+            ><span class="media-client">{{ item.client }}</span>
+          </button>
+          <div class="portfolio-caption">
+            <h3>{{ item.client }}</h3>
+            <span>{{ item.title }}</span>
+          </div>
+        </article>
+      }
+    </div>
+  </section>
+
+  <section class="contact section-shell" id="contact" aria-labelledby="contact-title">
+    <div class="contact-copy">
+      <div class="section-kicker"><span>05</span> Horizonte de eventos</div>
+      <h2 id="contact-title">Vamos criar<br />algo <em>singular</em><br />juntos.</h2>
+      <p>
+        O próximo projeto extraordinário começa com uma conversa. Não existe brief pequeno demais
+        para uma ideia grande.
+      </p>
+      <a
+        class="contact-number"
+        href="https://wa.me/5591980785068"
+        target="_blank"
+        rel="noopener noreferrer"
+        >(91) 98078-5068 <span aria-hidden="true">↗</span></a
+      >
+    </div>
+    <form
+      class="contact-form"
+      (submit)="startWhatsApp($event, nameInput.value, projectInput.value)"
+    >
+      <label for="contact-name">Como podemos chamar você?</label
+      ><input
+        #nameInput
+        id="contact-name"
+        name="nome"
+        type="text"
+        autocomplete="name"
+        placeholder="Seu nome"
+        required
+      />
+      <label for="contact-project">O que você está construindo?</label
+      ><textarea
+        #projectInput
+        id="contact-project"
+        name="projeto"
+        rows="4"
+        placeholder="Conte sobre sua marca e o que precisa..."
+      ></textarea>
+      <button class="button button-primary whatsapp-cta" type="submit">
+        <svg class="whatsapp-icon" viewBox="0 0 24 24" aria-hidden="true">
+          <path
+            d="M12 2a9.7 9.7 0 0 0-8.3 14.7L2.4 22l5.5-1.4A9.9 9.9 0 1 0 12 2Zm0 17.8c-1.5 0-2.9-.4-4.1-1.2l-.3-.2-3.2.8.9-3.1-.2-.3A7.9 7.9 0 1 1 12 19.8Zm4.3-5.9c-.2-.1-1.4-.7-1.6-.8-.2-.1-.4-.1-.5.1l-.7.8c-.1.2-.3.2-.5.1a6.5 6.5 0 0 1-1.9-1.2 7.1 7.1 0 0 1-1.3-1.6c-.1-.2 0-.3.1-.4l.4-.5.2-.4c.1-.1 0-.3 0-.4l-.7-1.7c-.2-.4-.4-.4-.5-.4h-.5c-.2 0-.4.1-.6.3-.2.2-.8.8-.8 1.9s.8 2.2.9 2.3c.1.2 1.6 2.5 3.9 3.5l1.3.5c.5.1.9.1 1.2.1.4-.1 1.4-.6 1.6-1.1.2-.5.2-1 .1-1.1 0-.1-.2-.2-.5-.3Z"
+          /></svg
+        >Falar sobre meu projeto
+      </button>
+      <p class="form-note">
+        A mensagem será preparada no WhatsApp. Nenhum dado é armazenado neste site.
+      </p>
+    </form>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <a class="footer-brand" href="#top" aria-label="EXIN Comunicação, início"
+    ><img src="/logo-exin.png" width="34" height="34" alt="EXIN Comunicação"
+  /></a>
+  <p class="footer-note">
+    Você não está apenas contratando uma agência. Está ancorando sua marca no tecido do
+    extraordinário. Mais do que entregar conteúdo, entregamos direção, suporte e presença.
+  </p>
+  <div class="footer-bottom">
+    <span>© {{ currentYear }} EXIN Comunicação | Belém, Pará</span>
+    <div class="footer-links">
+      <button type="button" (click)="openLegal('privacy')">Privacidade</button
+      ><button type="button" (click)="openLegal('terms')">Termos</button>
+      <a href="https://www.instagram.com/exincomunicacao/" target="_blank" rel="noopener noreferrer"
+        >Instagram ↗</a
+      ><a href="https://wa.me/5591980785068" target="_blank" rel="noopener noreferrer"
+        >WhatsApp ↗</a
+      >
+    </div>
+  </div>
+</footer>
+
+<dialog #videoDialog class="site-dialog video-dialog" (close)="selectedVideo.set(null)">
+  <button
+    class="dialog-close"
+    type="button"
+    aria-label="Fechar vídeo"
+    (click)="videoDialog.close()"
+  >
+    Fechar <span aria-hidden="true">×</span>
+  </button>
+  @if (selectedVideo(); as activeVideo) {
+    <div class="dialog-content">
+      <p class="section-kicker">{{ activeVideo.client }}</p>
+      <h2>{{ activeVideo.title }}</h2>
+      @if (activeVideo.source.type === 'file') {
+        <video
+          class="dialog-video"
+          [src]="activeVideo.source.url"
+          controls
+          playsinline
+          preload="metadata"
+          [attr.aria-label]="activeVideo.client + ': ' + activeVideo.title"
+        ></video>
+      }
+    </div>
+  }
+</dialog>
+
+<dialog #legalDialog class="site-dialog legal-dialog" (close)="legalDocument.set(null)">
+  <button
+    class="dialog-close"
+    type="button"
+    aria-label="Fechar documento"
+    (click)="legalDialog.close()"
+  >
+    Fechar <span aria-hidden="true">×</span>
+  </button>
+  @if (legalDocument() === 'privacy') {
+    <div class="dialog-content legal-content">
+      <p class="section-kicker">EXIN Comunicação · Belém, PA</p>
+      <h2>Política de privacidade</h2>
+      <p>
+        Este site institucional não armazena dados pessoais. Ao enviar o formulário, o nome e a
+        descrição do projeto são incluídos em uma mensagem do WhatsApp, aberta somente após sua
+        ação.
+      </p>
+      <p>
+        O tratamento de mensagens enviadas pelo WhatsApp segue as políticas e os termos do próprio
+        serviço.
+      </p>
+      <p>Contato: <a href="https://wa.me/5591980785068">WhatsApp (91) 98078-5068</a>.</p>
+    </div>
+  } @else {
+    <div class="dialog-content legal-content">
+      <p class="section-kicker">EXIN Comunicação · Belém, PA</p>
+      <h2>Termos de uso</h2>
+      <p>
+        O conteúdo deste site é apresentado para fins institucionais e de portfólio. Marcas, vídeos,
+        fotografias e textos pertencem aos seus respectivos titulares e não podem ser reproduzidos
+        sem autorização.
+      </p>
+      <p>
+        Os links para WhatsApp e Instagram levam a serviços externos, sujeitos aos termos de cada
+        plataforma.
+      </p>
+    </div>
+  }
+</dialog>

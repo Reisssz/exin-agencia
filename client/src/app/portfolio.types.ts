@@ -1,0 +1,61 @@
+export type PortfolioSource = { type: 'file'; url: string } | { type: 'instagram'; url: string };
+
+export interface PortfolioItem {
+  id: string;
+  client: string;
+  title: string;
+  orientation: 'wide' | 'portrait' | 'standard';
+  poster: string;
+  source: PortfolioSource;
+}
+
+export const PORTFOLIO_FALLBACK: PortfolioItem[] = [
+  {
+    id: 'agrocangaia',
+    client: 'Agrocangaia',
+    title: 'Produção audiovisual',
+    orientation: 'wide',
+    poster: '/agrocangaia-thumb.webp',
+    source: { type: 'file', url: '/movies/AGROCANGAIA-01.mov' },
+  },
+  {
+    id: 'victoria-arquitetura',
+    client: 'Victoria Guerreiro',
+    title: 'Produção audiovisual',
+    orientation: 'portrait',
+    poster: '/victoria-thumb.webp',
+    source: { type: 'file', url: '/movies/victoria-arq.mov' },
+  },
+  {
+    id: 'piatra-01',
+    client: 'PIATRA',
+    title: 'Produção audiovisual',
+    orientation: 'standard',
+    poster: '/piatra-01-thumb.webp',
+    source: { type: 'file', url: '/movies/piatra-01.mp4' },
+  },
+  {
+    id: 'dt-arquitetos',
+    client: 'DT Arquitetos',
+    title: 'Produção audiovisual',
+    orientation: 'standard',
+    poster: '/dt-arquitetos-thumb.webp',
+    source: { type: 'file', url: '/movies/DT-arq-01.mp4' },
+  },
+  {
+    id: 'piatra-02',
+    client: 'PIATRA',
+    title: 'Produção audiovisual',
+    orientation: 'standard',
+    poster: '/piatra-02-thumb.webp',
+    source: { type: 'file', url: '/movies/piatra-02.mp4' },
+  },
+  {
+    id: 'track-field',
+    client: 'Track & Field Boulevard',
+    title: 'Produção audiovisual',
+    orientation: 'portrait',
+    poster: '/track-field-thumb.webp',
+    source: { type: 'file', url: '/movies/video-track-01.mp4' },
+  },
+];
