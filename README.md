@@ -20,6 +20,10 @@ npm start
 
 O Express serve o build Angular, os endpoints da API e os vídeos com suporte a requisições parciais para reprodução progressiva.
 
+## Netlify
+
+O arquivo `netlify.toml` configura a raiz do repositório como base, `npm run build` como comando e `client/dist/exin-client/browser` como diretório publicado. As funções Node em `netlify/functions` atendem `/api/portfolio` e `/api/health`; o redirect final encaminha rotas do site para o Angular. Use Node.js 22.23.3 ou superior compatível com a faixa declarada no projeto.
+
 ## API
 
 - `GET /api/health`: estado do serviço.
