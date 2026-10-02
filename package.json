@@ -2,12 +2,18 @@
   "name": "exin-comunicacao",
   "version": "1.0.0",
   "private": true,
+  "packageManager": "npm@10.9.9",
   "workspaces": [
     "client",
     "server"
   ],
   "engines": {
     "node": ">=22.22.3 <27"
+  },
+  "overrides": {
+    "vitest@^5.0.0": {
+      "std-env": "4.2.0"
+    }
   },
   "scripts": {
     "dev": "concurrently --kill-others-on-fail \"npm:dev:api\" \"npm:dev:web\"",
