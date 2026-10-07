@@ -24,6 +24,8 @@ O Express serve o build Angular, os endpoints da API e os vídeos com suporte a 
 
 O arquivo `netlify.toml` configura a raiz do repositório como base, `npm run build` como comando e `client/dist/exin-client/browser` como diretório publicado. As funções Node em `netlify/functions` atendem `/api/portfolio` e `/api/health`; o redirect final encaminha rotas do site para o Angular. Use Node.js 22.23.3 ou superior compatível com a faixa declarada no projeto.
 
+O Netlify instala dependências com `--include=optional`, pois o Angular usa bindings nativos como `@oxc-parser/binding-linux-x64-gnu`. O lockfile raiz deve conter os bindings para Linux e Windows. Ao regenerá-lo, use uma pasta limpa, sem `node_modules`, para evitar o bug npm/cli#4828 que omite plataformas não instaladas localmente. Não apague o lockfile durante o deploy. Após atualizar o lockfile, execute um deploy com a opção **Clear cache and deploy site** no painel do Netlify.
+
 ## API
 
 - `GET /api/health`: estado do serviço.

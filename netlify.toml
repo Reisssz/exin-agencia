@@ -6,6 +6,7 @@ functions = "netlify/functions"
 
 [build.environment]
 NODE_VERSION = "22.23.3"
+NPM_FLAGS = "--include=optional"
 
 [functions]
 node_bundler = "esbuild"
