@@ -179,6 +179,15 @@
                 loading="lazy"
                 decoding="async"
               />
+              <video
+                class="portfolio-video"
+                [src]="item.source.url"
+                [poster]="item.poster"
+                preload="auto"
+                muted
+                playsinline
+                aria-hidden="true"
+              ></video>
             } @else {
               <div class="instagram-preview">
                 <span>EXIN / REELS</span><strong>Assista no Instagram</strong>
@@ -266,6 +275,9 @@
       ><a href="https://wa.me/5591980785068" target="_blank" rel="noopener noreferrer"
         >WhatsApp ↗</a
       >
+      <a class="weblytics-credit" href="https://weblytics.com.br" target="_blank" rel="noopener noreferrer"
+        >Desenvolvido por <strong>Weblytics</strong></a
+      >
     </div>
   </div>
 </footer>
@@ -287,6 +299,7 @@
         <video
           class="dialog-video"
           [src]="activeVideo.source.url"
+          [poster]="activeVideo.poster"
           controls
           playsinline
           preload="metadata"

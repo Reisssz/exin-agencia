@@ -12,8 +12,30 @@
   <link rel="preload" as="image" href="/logo-exin.png" fetchpriority="high">
   <link rel="icon" type="image/png" href="/logo-exin.png">
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body.is-loading { margin: 0; overflow: hidden; background: #121214; }
+    body.is-loading app-root { visibility: hidden; }
+    body.is-loading app-root * { animation-play-state: paused !important; }
+    .site-loader { position: fixed; inset: 0; z-index: 10000; display: grid; place-content: center; justify-items: center; gap: 28px; background: #121214; color: #f0eeff; transition: opacity .4s ease, visibility .4s ease; }
+    .site-loader.is-complete { opacity: 0; visibility: hidden; pointer-events: none; }
+    .site-loader img { width: 72px; height: 72px; object-fit: contain; }
+    .site-loader-track { width: 160px; height: 2px; overflow: hidden; background: rgba(125,92,242,.18); }
+    .site-loader-track::after { content: ''; display: block; width: 64px; height: 100%; background: #7d5cf2; animation: loader-sweep 1.2s ease-in-out infinite; }
+    .site-loader-label { margin: 0; color: rgba(240,238,255,.6); font: 12px 'Space Grotesk', sans-serif; letter-spacing: .12em; text-transform: uppercase; }
+    .site-loader-retry { padding: 10px 16px; border: 1px solid rgba(125,92,242,.5); border-radius: 4px; background: transparent; color: #f0eeff; font: 13px 'Space Grotesk', sans-serif; cursor: pointer; }
+    .site-loader-retry[hidden] { display: none; }
+    @keyframes loader-sweep { from { transform: translateX(-64px); } to { transform: translateX(160px); } }
+    @media (prefers-reduced-motion: reduce) { .site-loader { transition: none; } .site-loader-track::after { width: 100%; animation: none; } }
+  </style>
 </head>
-<body>
-  <app-root></app-root>
+<body class="is-loading">
+  <div id="site-loader" class="site-loader" role="status" aria-live="polite" aria-label="Carregando o site da EXIN">
+    <img src="/logo-exin.png" width="72" height="72" alt="EXIN Comunicação" fetchpriority="high">
+    <div class="site-loader-track" aria-hidden="true"></div>
+    <p class="site-loader-label">Carregando</p>
+    <button id="loader-retry" class="site-loader-retry" type="button" hidden>Tentar novamente</button>
+  </div>
+  <app-root inert aria-busy="true"></app-root>
+  <noscript><style>.site-loader { display: none; }</style><p style="color:#f0eeff;text-align:center">Ative o JavaScript para acessar o site da EXIN.</p></noscript>
 </body>
 </html>

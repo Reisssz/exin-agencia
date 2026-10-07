@@ -1,4 +1,5 @@
-import { Component, ElementRef, OnInit, ViewChild, inject, signal } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { Component, DestroyRef, ElementRef, OnInit, ViewChild, afterNextRender, inject, signal } from '@angular/core';
 import { PortfolioApiService } from './portfolio-api.service';
 import { RevealDirective } from './reveal.directive';
 import { PORTFOLIO_FALLBACK, PortfolioItem } from './portfolio.types';
@@ -46,6 +47,17 @@ export class App implements OnInit {
   @ViewChild('legalDialog') private legalDialog?: ElementRef<HTMLDialogElement>;
 
   private readonly portfolioApi = inject(PortfolioApiService);
+  private readonly document = inject(DOCUMENT);
+  private readonly host: ElementRef<HTMLElement> = inject(ElementRef);
+  private readonly destroyRef = inject(DestroyRef);
+  private resolvePortfolioReady!: () => void;
+  private readonly portfolioReady = new Promise<void>((resolve) => {
+    this.resolvePortfolioReady = resolve;
+  });
+
+  constructor() {
+    afterNextRender(() => void this.finishLoading());
+  }
 
   ngOnInit(): void {
     const localPosters = new Map(PORTFOLIO_FALLBACK.map((item) => [item.id, item.poster]));
@@ -59,9 +71,86 @@ export class App implements OnInit {
             })),
           );
         }
+        this.resolvePortfolioReady();
       },
-      error: () => undefined,
+      error: () => this.resolvePortfolioReady(),
     });
+  }
+
+  private async finishLoading(): Promise<void> {
+    const view = this.document.defaultView;
+    if (!view) return;
+
+    const retryButton = this.document.getElementById('loader-retry');
+    const retry = () => view.location.reload();
+    retryButton?.addEventListener('click', retry);
+    const timeoutId = view.setTimeout(() => {
+      const label = this.document.querySelector('.site-loader-label');
+      if (label) label.textContent = 'Preparando os vídeos';
+      retryButton?.removeAttribute('hidden');
+    }, 15000);
+    this.destroyRef.onDestroy(() => view.clearTimeout(timeoutId));
+    this.destroyRef.onDestroy(() => retryButton?.removeEventListener('click', retry));
+
+    await this.portfolioReady;
+    await new Promise<void>((resolve) => view.requestAnimationFrame(() => resolve()));
+    if (this.destroyRef.destroyed) return;
+
+    const images = Array.from(this.document.images);
+    const videos = Array.from(this.host.nativeElement.querySelectorAll<HTMLVideoElement>('.portfolio-video'));
+    await Promise.all([
+      this.document.fonts?.ready.catch(() => undefined),
+      ...images.map((image) => this.waitForImage(image)),
+      ...videos.map((video) => this.waitForVideo(video)),
+    ]);
+    await new Promise<void>((resolve) => view.requestAnimationFrame(() => resolve()));
+    view.clearTimeout(timeoutId);
+    retryButton?.removeEventListener('click', retry);
+    if (this.destroyRef.destroyed) return;
+
+    this.host.nativeElement.removeAttribute('inert');
+    this.host.nativeElement.setAttribute('aria-busy', 'false');
+    this.document.body.classList.remove('is-loading');
+    this.document.getElementById('site-loader')?.classList.add('is-complete');
+  }
+
+  private async waitForVideo(video: HTMLVideoElement): Promise<void> {
+    await new Promise<void>((resolve) => {
+      const settled = () => {
+        if (video.readyState >= HTMLMediaElement.HAVE_CURRENT_DATA) {
+          video.classList.add('frame-ready');
+        }
+        video.removeEventListener('loadeddata', settled);
+        video.removeEventListener('error', settled);
+        resolve();
+      };
+      if (video.readyState >= HTMLMediaElement.HAVE_CURRENT_DATA || video.error) {
+        settled();
+        return;
+      }
+      video.addEventListener('loadeddata', settled, { once: true });
+      video.addEventListener('error', settled, { once: true });
+      this.destroyRef.onDestroy(settled);
+      video.load();
+    });
+  }
+
+  private async waitForImage(image: HTMLImageElement): Promise<void> {
+    image.loading = 'eager';
+    if (!image.complete) {
+      await new Promise<void>((resolve) => {
+        const settled = () => {
+          image.removeEventListener('load', settled);
+          image.removeEventListener('error', settled);
+          resolve();
+        };
+        image.addEventListener('load', settled, { once: true });
+        image.addEventListener('error', settled, { once: true });
+      });
+    }
+    if (image.naturalWidth && typeof image.decode === 'function') {
+      await image.decode().catch(() => undefined);
+    }
   }
 
   protected closeMenu(): void {

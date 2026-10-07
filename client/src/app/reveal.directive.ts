@@ -1,8 +1,13 @@
-import { AfterViewInit, Directive, ElementRef, HostBinding, OnDestroy } from '@angular/core';
+import { AfterViewInit, Directive, ElementRef, HostBinding, OnDestroy, signal } from '@angular/core';
 
 @Directive({ selector: '[appReveal]', standalone: true })
 export class RevealDirective implements AfterViewInit, OnDestroy {
-  @HostBinding('class.is-visible') private visible = false;
+  private readonly visible = signal(false);
+
+  @HostBinding('class.is-visible')
+  protected get isVisible(): boolean {
+    return this.visible();
+  }
 
   private observer?: IntersectionObserver;
 
@@ -12,14 +17,14 @@ export class RevealDirective implements AfterViewInit, OnDestroy {
     const reducedMotion =
       typeof matchMedia === 'function' && matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (reducedMotion || typeof IntersectionObserver === 'undefined') {
-      this.visible = true;
+      this.visible.set(true);
       return;
     }
 
     this.observer = new IntersectionObserver(
       (entries) => {
         if (entries.some((entry) => entry.isIntersecting)) {
-          this.visible = true;
+          this.visible.set(true);
           this.observer?.disconnect();
         }
       },

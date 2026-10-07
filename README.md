@@ -34,4 +34,4 @@ Para gerar ou validar o lock em uma pasta temporária, entre nessa pasta antes d
 - `GET /api/portfolio`: projetos e origens dos vídeos.
 - `GET /movies/:arquivo`: mídia local, com suporte a `Range`.
 
-Os projetos aceitam uma origem `file` para mídia local ou `instagram` para abrir uma publicação pública. Nenhum vídeo é solicitado no carregamento inicial: a mídia só é adicionada ao player quando o visitante abre um projeto. A interface mantém uma lista local de fallback se a API estiver indisponível.
+Os projetos aceitam uma origem `file` para mídia local ou `instagram` para abrir uma publicação pública. O loading inicial aguarda a renderização Angular, o portfólio (ou fallback local), as fontes, as thumbnails e o primeiro quadro dos vídeos locais. Os vídeos são pré-carregados sem reprodução automática; isso pode aumentar a espera em conexões lentas. Após 15 segundos, aparece a opção de tentar novamente, sem liberar automaticamente conteúdo incompleto. Em caso de falha de um vídeo, o card mantém a thumbnail. As revelações de manifesto e portfólio respondem ao scroll sem depender de fragmentos na URL.
