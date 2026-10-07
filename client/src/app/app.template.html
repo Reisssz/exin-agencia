@@ -58,23 +58,17 @@
     </div>
     <div class="hero-ticker" aria-hidden="true">
       <div class="ticker-track">
-        <span>Escuta</span><i></i><span>Estratégia</span><i></i><span>Construção</span><i></i
-        ><span>Comunicação que converte</span><i></i><span>Escuta</span><i></i
-        ><span>Estratégia</span><i></i><span>Construção</span><i></i
-        ><span>Comunicação que converte</span><i></i>
+        @for (brand of clientBrands; track brand) {
+          <span>{{ brand }}</span><i></i>
+        }
+        @for (brand of clientBrands; track brand) {
+          <span>{{ brand }}</span><i></i>
+        }
       </div>
     </div>
     <a class="hero-scroll-hint" href="#manifesto"
       >Role para explorar <span aria-hidden="true">↓</span></a
     >
-  </section>
-
-  <section class="client-strip" aria-label="Marcas atendidas">
-    <p>Marcas que confiam no nosso trabalho</p>
-    <div class="client-names">
-      <span>Agrocangaia</span><span>DT Arquitetos</span><span>IMPAXX</span
-      ><span>Track &amp; Field</span><span>PIATRA</span>
-    </div>
   </section>
 
   <section class="manifesto section-shell" id="manifesto" aria-labelledby="manifesto-title">

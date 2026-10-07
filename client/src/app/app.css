@@ -41,10 +41,6 @@
 .hero-index { position: absolute; right: clamp(24px, 5vw, 76px); bottom: 34px; color: var(--paper-muted); font-size: 11px; }
 @keyframes reveal { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
 
-.client-strip { display: grid; grid-template-columns: minmax(190px, .55fr) 2fr; align-items: center; gap: 24px; padding: 28px clamp(24px, 9vw, 140px); border-bottom: 1px solid var(--line); }
-.client-strip p { margin: 0; color: var(--paper-muted); font-size: 12px; text-transform: uppercase; }
-.client-names { display: flex; justify-content: space-between; align-items: center; gap: 20px; color: #bfc0b8; font: 600 15px var(--font-display); }
-
 .section-shell { width: min(100%, 1600px); margin: 0 auto; padding-right: clamp(24px, 9vw, 140px); padding-left: clamp(24px, 9vw, 140px); }
 .section-kicker { color: var(--paper-muted); }
 .section-kicker span { color: var(--accent); font: 600 12px var(--font-display); }
@@ -198,8 +194,6 @@
 	.hero-bottom > p { max-width: 295px; font-size: 15px; }
 	.hero-actions { align-items: start; flex-direction: column; gap: 18px; }
 	.hero-index { right: 24px; bottom: 24px; }
-	.client-strip { grid-template-columns: 1fr; gap: 18px; padding: 24px; }
-	.client-names { justify-content: start; flex-wrap: wrap; gap: 12px 22px; font-size: 13px; }
 	.section-shell { padding-right: 24px; padding-left: 24px; }
 	.manifesto { gap: 28px; padding-top: 86px; padding-bottom: 92px; }
 	.manifesto h2 { font-size: 32px; }
@@ -258,9 +252,6 @@
 @keyframes type-cycle { 0%, 3% { opacity: 0; transform: translateY(10px); } 7%, 27% { opacity: 1; transform: translateY(0); } 32%, 100% { opacity: 0; transform: translateY(-10px); } }
 @keyframes scroll-nudge { 50% { transform: translateY(4px); } }
 
-.client-strip { background: var(--ink); }
-.client-strip p { font: 10px var(--font-mono, 'JetBrains Mono', monospace); letter-spacing: .15em; }
-.client-names { color: rgba(240,238,255,.48); font-family: var(--font-display); }
 .manifesto { padding-top: 110px; padding-bottom: 118px; }
 .manifesto-content { max-width: 1100px; }
 .manifesto-content:not(.is-visible) { opacity: 0; transform: translateY(24px); }

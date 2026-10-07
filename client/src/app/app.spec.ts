@@ -38,6 +38,9 @@ describe('App', () => {
 
     const compiled = fixture.nativeElement as HTMLElement;
     expect(compiled.querySelector('h1')?.textContent).toContain('Estratégia de');
+    expect(compiled.querySelector('.ticker-track')?.textContent).toContain('Agrocangaia');
+    expect(compiled.querySelector('.ticker-track')?.textContent).not.toContain('Escuta');
+    expect(compiled.querySelector('.client-strip')).toBeNull();
     expect(compiled.querySelectorAll('.service-item').length).toBe(3);
     expect(compiled.querySelectorAll('.portfolio-item img').length).toBe(6);
     expect(

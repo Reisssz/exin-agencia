@@ -16,6 +16,13 @@ export class App implements OnInit {
   protected readonly menuOpen = signal(false);
   protected readonly selectedVideo = signal<PortfolioItem | null>(null);
   protected readonly legalDocument = signal<'privacy' | 'terms' | null>(null);
+  protected readonly clientBrands = [
+    'Agrocangaia',
+    'DT Arquitetos',
+    'IMPAXX',
+    'Track & Field',
+    'PIATRA',
+  ];
   protected readonly services = [
     {
       number: '01',
