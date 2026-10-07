@@ -26,6 +26,8 @@ O arquivo `netlify.toml` configura a raiz do repositório como base, `npm run bu
 
 O Netlify instala dependências com `--include=optional`, pois o Angular usa bindings nativos como `@oxc-parser/binding-linux-x64-gnu`. O lockfile raiz deve conter os bindings para Linux e Windows. Ao regenerá-lo, use uma pasta limpa, sem `node_modules`, para evitar o bug npm/cli#4828 que omite plataformas não instaladas localmente. Não apague o lockfile durante o deploy. Após atualizar o lockfile, execute um deploy com a opção **Clear cache and deploy site** no painel do Netlify.
 
+Para gerar ou validar o lock em uma pasta temporária, entre nessa pasta antes de executar o npm. Não use `npm --prefix` a partir de outro projeto: isso pode registrar uma dependência `file:` para o projeto de origem. Os únicos links locais do lock devem apontar para os workspaces `client` e `server`.
+
 ## API
 
 - `GET /api/health`: estado do serviço.
